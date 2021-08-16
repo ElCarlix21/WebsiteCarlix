@@ -1,0 +1,52 @@
+---
+layout: base
+---
+
+{% comment %} Show the page's subtitle. {% endcomment %}
+<div class="subtitle">
+  {{ page.subtitle | xml_escape }}
+</div>
+
+{% assign tag_post = '' | split: '' %}
+
+{% for post in site.series %}
+  {% if post.tags contains page.tag-name %}
+    {% assign tag_post = tag_post | push: post %}
+  {% endif %}
+{% endfor %}
+
+{% for post in site.shorts %}
+  {% if post.tags contains page.tag-name %}
+    {% assign tag_post = tag_post | push: post %}
+  {% endif %}
+{% endfor %}
+
+{% for post in site.invitados %}
+  {% if post.tags contains page.tag-name %}
+    {% assign tag_post = tag_post | push: post %}
+  {% endif %}
+{% endfor %}
+
+{% for post in site.Tutoriales %}
+  {% if post.tags contains page.tag-name %}
+    {% assign tag_post = tag_post | push: post %}
+  {% endif %}
+{% endfor %}
+
+{% for post in site.Cursos %}
+  {% if post.tags contains page.tag-name %}
+    {% assign tag_post = tag_post | push: post %}
+  {% endif %}
+{% endfor %}
+
+{% for post in site.mas %}
+  {% if post.tags contains page.tag-name %}
+    {% assign tag_post = tag_post | push: post %}
+  {% endif %}
+{% endfor %}
+
+{% include 1-tools/sort-videos.html videos=tag_post sortByDate=true reverse=true %}
+
+{% include 3-modules/video-list.html sortedVideos=out_sortedVideos %}
+
+<a href="{{ '/tag' | relative_url }}">Mirar mas tag</a>
